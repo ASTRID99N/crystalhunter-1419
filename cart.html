@@ -16,6 +16,7 @@
             line-height: 1.6;
             color: #333;
             background: #f9f9f9;
+            overflow-x: hidden;
         }
 
         /* Header Styles */
@@ -32,11 +33,11 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
@@ -44,7 +45,8 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -52,8 +54,9 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 5px;
+            font-size: 0.85rem;
         }
 
         .nav-links a:hover {
@@ -64,35 +67,36 @@
         /* Cart Page Styles */
         .cart-page {
             max-width: 1000px;
-            margin: 3rem auto;
-            padding: 0 2rem;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
         .page-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             color: #F880C8;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .cart-container {
             background: white;
             border-radius: 20px;
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: 0 5px 30px rgba(248, 128, 200, 0.15);
         }
 
         .cart-items {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .cart-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             padding: 1.5rem;
             border-bottom: 2px solid #f0f0f0;
             transition: all 0.3s ease;
+            gap: 1rem;
         }
 
         .cart-item:hover {
@@ -102,34 +106,37 @@
         .item-details {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            flex: 1;
+            gap: 1rem;
+            width: 100%;
         }
 
         .item-icon {
-            font-size: 3rem;
-            width: 80px;
-            height: 80px;
+            font-size: 2.5rem;
+            min-width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
             border-radius: 10px;
+            flex-shrink: 0;
         }
 
         .item-info {
             flex: 1;
+            min-width: 0;
         }
 
         .item-name {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: #333;
             margin-bottom: 0.5rem;
+            word-wrap: break-word;
         }
 
         .item-price {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #F880C8;
             font-weight: bold;
         }
@@ -143,27 +150,29 @@
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
+            width: 100%;
+            max-width: 200px;
         }
 
         .remove-btn:hover {
             background: #cc0000;
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .empty-cart {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 1rem;
         }
 
         .empty-cart-icon {
-            font-size: 5rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
         }
 
         .empty-cart-text {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #666;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .continue-shopping {
@@ -172,7 +181,7 @@
             padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
@@ -187,9 +196,9 @@
 
         .cart-summary {
             background: linear-gradient(135deg, rgba(248, 128, 200, 0.1) 0%, rgba(230, 96, 176, 0.1) 100%);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .summary-row {
@@ -197,7 +206,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .summary-total {
@@ -206,14 +215,14 @@
             align-items: center;
             padding-top: 1rem;
             border-top: 2px solid #F880C8;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #333;
         }
 
         .total-amount {
             color: #F880C8;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         .checkout-btn {
@@ -223,7 +232,7 @@
             padding: 1.2rem;
             border: none;
             border-radius: 10px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             margin-top: 1.5rem;
@@ -237,6 +246,7 @@
 
         .cart-actions {
             display: flex;
+            flex-direction: column;
             gap: 1rem;
             margin-top: 1.5rem;
         }
@@ -248,7 +258,7 @@
             padding: 1rem;
             border: none;
             border-radius: 10px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -266,7 +276,7 @@
             padding: 1rem;
             border: none;
             border-radius: 10px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -285,27 +295,102 @@
             background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
             color: white;
             text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .cart-item {
-                flex-direction: column;
+        .footer-content p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 600px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .nav-links {
                 gap: 1rem;
             }
 
-            .item-details {
-                width: 100%;
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .cart-item {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .item-icon {
+                font-size: 3rem;
+                width: 80px;
+                height: 80px;
+            }
+
+            .item-name {
+                font-size: 1.3rem;
+            }
+
+            .item-price {
+                font-size: 1.2rem;
             }
 
             .remove-btn {
-                width: 100%;
+                width: auto;
             }
 
             .cart-actions {
-                flex-direction: column;
+                flex-direction: row;
+            }
+
+            .summary-row {
+                font-size: 1.1rem;
+            }
+
+            .summary-total {
+                font-size: 1.5rem;
+            }
+
+            .total-amount {
+                font-size: 2rem;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 968px) {
+            nav {
+                padding: 0 2rem;
+            }
+
+            .cart-page {
+                margin: 3rem auto;
+                padding: 0 2rem;
+            }
+
+            .cart-container {
+                padding: 2rem;
+            }
+
+            .empty-cart {
+                padding: 4rem 2rem;
+            }
+
+            .empty-cart-icon {
+                font-size: 5rem;
+            }
+
+            .empty-cart-text {
+                font-size: 1.5rem;
+            }
+
+            .cart-summary {
+                padding: 2rem;
             }
         }
     </style>
@@ -365,13 +450,17 @@
 
         // Calculate total price
         function calculateTotal(cart) {
-            return cart.reduce((total, item) => total + item.price, 0);
+            return cart.reduce(function(total, item) {
+                return total + item.price;
+            }, 0);
         }
 
         // Remove item from cart
         function removeFromCart(itemId) {
             let cart = getCart();
-            cart = cart.filter(item => item.id !== itemId);
+            cart = cart.filter(function(item) {
+                return item.id !== itemId;
+            });
             saveCart(cart);
             displayCart();
             updateCartCount();
@@ -405,13 +494,7 @@
             const cartContent = document.getElementById('cart-content');
 
             if (cart.length === 0) {
-                cartContent.innerHTML = `
-                    <div class="empty-cart">
-                        <div class="empty-cart-icon">🛒</div>
-                        <div class="empty-cart-text">Your cart is empty</div>
-                        <a href="index.html#products" class="continue-shopping">Continue Shopping</a>
-                    </div>
-                `;
+                cartContent.innerHTML = '<div class="empty-cart"><div class="empty-cart-icon">🛒</div><div class="empty-cart-text">Your cart is empty</div><a href="index.html#products" class="continue-shopping">Continue Shopping</a></div>';
                 return;
             }
 
@@ -419,44 +502,13 @@
             
             let cartHTML = '<div class="cart-items">';
             
-            cart.forEach(item => {
-                cartHTML += `
-                    <div class="cart-item">
-                        <div class="item-details">
-                            <div class="item-icon">${item.icon}</div>
-                            <div class="item-info">
-                                <div class="item-name">${item.name}</div>
-                                <div class="item-price">$${item.price.toLocaleString()}</div>
-                            </div>
-                        </div>
-                        <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
-                    </div>
-                `;
+            cart.forEach(function(item) {
+                cartHTML += '<div class="cart-item"><div class="item-details"><div class="item-icon">' + item.icon + '</div><div class="item-info"><div class="item-name">' + item.name + '</div><div class="item-price">$' + item.price.toLocaleString() + '</div></div></div><button class="remove-btn" onclick="removeFromCart(' + item.id + ')">Remove</button></div>';
             });
 
             cartHTML += '</div>';
 
-            cartHTML += `
-                <div class="cart-summary">
-                    <div class="summary-row">
-                        <span>Subtotal:</span>
-                        <span>$${total.toLocaleString()}</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Shipping:</span>
-                        <span>FREE</span>
-                    </div>
-                    <div class="summary-total">
-                        <span>Total:</span>
-                        <span class="total-amount">$${total.toLocaleString()}</span>
-                    </div>
-                    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
-                    <div class="cart-actions">
-                        <a href="index.html#products" class="continue-shopping-btn">Continue Shopping</a>
-                        <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
-                    </div>
-                </div>
-            `;
+            cartHTML += '<div class="cart-summary"><div class="summary-row"><span>Subtotal:</span><span>$' + total.toLocaleString() + '</span></div><div class="summary-row"><span>Shipping:</span><span>FREE</span></div><div class="summary-total"><span>Total:</span><span class="total-amount">$' + total.toLocaleString() + '</span></div><button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button><div class="cart-actions"><a href="index.html#products" class="continue-shopping-btn">Continue Shopping</a><button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button></div></div>';
 
             cartContent.innerHTML = cartHTML;
         }
