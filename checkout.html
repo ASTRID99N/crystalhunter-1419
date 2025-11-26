@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Crystal Hunter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(248, 128, 200, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .page-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #F880C8;
+            margin-bottom: 1rem;
+        }
+
+        .billing-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #F880C8;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #F880C8;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #F880C8;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .order-summary {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .summary-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .item-details-summary {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .item-icon-small {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
+            border-radius: 8px;
+        }
+
+        .item-name-small {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .item-price-small {
+            color: #F880C8;
+            font-weight: bold;
+        }
+
+        .summary-totals {
+            background: linear-gradient(135deg, rgba(248, 128, 200, 0.1) 0%, rgba(230, 96, 176, 0.1) 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .total-row.final {
+            padding-top: 1rem;
+            border-top: 2px solid #F880C8;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .total-amount {
+            color: #F880C8;
+        }
+
+        .payment-section {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-option {
+            border: 3px solid #ddd;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: #F880C8;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(248, 128, 200, 0.3);
+        }
+
+        .payment-option.active {
+            border-color: #F880C8;
+            background: linear-gradient(135deg, rgba(248, 128, 200, 0.1) 0%, rgba(230, 96, 176, 0.1) 100%);
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .payment-details {
+            display: none;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .payment-details.active {
+            display: block;
+        }
+
+        .card-form {
+            max-width: 500px;
+        }
+
+        .card-number-group {
+            position: relative;
+        }
+
+        .card-logos {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .card-logo {
+            width: 35px;
+            height: 25px;
+            background: #ddd;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .place-order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(248, 128, 200, 0.5);
+        }
+
+        .back-to-cart {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .back-to-cart:hover {
+            color: #F880C8;
+        }
+
+        .security-badge {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .security-badge::before {
+            content: "🔒";
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 968px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-section {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">💎 Crystal Hunter</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="cart.html">🛒 Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="checkout-container">
+        <h1 class="page-title">💳 Checkout</h1>
+
+        <div class="billing-section">
+            <h2 class="section-title">Billing Information</h2>
+            <form id="billing-form">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="fullName" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="email" required placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="phone" required placeholder="+1 (555) 123-4567">
+                </div>
+
+                <div class="form-group">
+                    <label>Street Address *</label>
+                    <input type="text" id="address" required placeholder="123 Main Street">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>City *</label>
+                        <input type="text" id="city" required placeholder="New York">
+                    </div>
+                    <div class="form-group">
+                        <label>State/Province *</label>
+                        <input type="text" id="state" required placeholder="NY">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Zip/Postal Code *</label>
+                        <input type="text" id="zip" required placeholder="10001">
+                    </div>
+                    <div class="form-group">
+                        <label>Country *</label>
+                        <select id="country" required>
+                            <option value="">Select Country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="order-summary">
+            <h2 class="section-title">Order Summary</h2>
+            <div class="summary-items" id="summary-items"></div>
+            <div class="summary-totals">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0</span>
+                </div>
+                <div class="total-row">
+                    <span>Shipping:</span>
+                    <span>FREE</span>
+                </div>
+                <div class="total-row">
+                    <span>Tax:</span>
+                    <span id="tax">$0</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total">$0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <h2 class="section-title">Select Payment Method</h2>
+            
+            <div class="payment-methods">
+                <div class="payment-option" onclick="selectPayment('card')">
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-name">Credit/Debit Card</div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('paypal')">
+                    <div class="payment-icon">🅿️</div>
+                    <div class="payment-name">PayPal</div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('stripe')">
+                    <div class="payment-icon">💰</div>
+                    <div class="payment-name">Stripe</div>
+                </div>
+
+                <div class="payment-option" onclick="selectPayment('crypto')">
+                    <div class="payment-icon">₿</div>
+                    <div class="payment-name">Cryptocurrency</div>
+                </div>
+            </div>
+
+            <div class="payment-details" id="card-details">
+                <h3 style="margin-bottom: 1.5rem; color: #F880C8;">Enter Card Details</h3>
+                <div class="card-form">
+                    <div class="form-group card-number-group">
+                        <label>Card Number *</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                        <div class="card-logos">
+                            <div class="card-logo">VISA</div>
+                            <div class="card-logo">MC</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Cardholder Name *</label>
+                        <input type="text" id="cardName" placeholder="John Doe">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Expiry Date *</label>
+                            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV *</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-details" id="paypal-details">
+                <h3 style="margin-bottom: 1rem; color: #F880C8;">PayPal Payment</h3>
+                <p style="margin-bottom: 1rem;">You will be redirected to PayPal to complete your purchase securely.</p>
+                <div id="paypal-button-container"></div>
+            </div>
+
+            <div class="payment-details" id="stripe-details">
+                <h3 style="margin-bottom: 1rem; color: #F880C8;">Stripe Payment</h3>
+                <p style="margin-bottom: 1rem;">You will be redirected to Stripe's secure payment page.</p>
+                <div id="stripe-button-container"></div>
+            </div>
+
+            <div class="payment-details" id="crypto-details">
+                <h3 style="margin-bottom: 1rem; color: #F880C8;">Cryptocurrency Payment</h3>
+                <p style="margin-bottom: 1rem;">We accept Bitcoin, Ethereum, and other major cryptocurrencies.</p>
+                <div class="form-group">
+                    <label>Select Cryptocurrency</label>
+                    <select id="cryptoType">
+                        <option value="BTC">Bitcoin (BTC)</option>
+                        <option value="ETH">Ethereum (ETH)</option>
+                        <option value="USDT">Tether (USDT)</option>
+                        <option value="BNB">Binance Coin (BNB)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+            
+            <div class="security-badge">Secure SSL Encrypted Payment</div>
+            
+            <a href="cart.html" class="back-to-cart">← Back to Cart</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Crystal Hunter</h3>
+            <p>&copy; 2025 Crystal Hunter. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedPaymentMethod = null;
+
+        function loadOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('crystalHunterCart') || '[]');
+            const summaryContainer = document.getElementById('summary-items');
+            
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            let subtotal = 0;
+            let itemsHTML = '';
+
+            cart.forEach(function(item) {
+                subtotal += item.price;
+                itemsHTML += '<div class="summary-item"><div class="item-details-summary"><div class="item-icon-small">' + item.icon + '</div><div class="item-name-small">' + item.name + '</div></div><div class="item-price-small">$' + item.price.toLocaleString() + '</div></div>';
+            });
+
+            summaryContainer.innerHTML = itemsHTML;
+
+            const tax = Math.round(subtotal * 0.08);
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString();
+            document.getElementById('tax').textContent = '$' + tax.toLocaleString();
+            document.getElementById('total').textContent = '$' + total.toLocaleString();
+        }
+
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+
+            document.querySelectorAll('.payment-option').forEach(function(option) {
+                option.classList.remove('active');
+            });
+
+            event.target.closest('.payment-option').classList.add('active');
+
+            document.querySelectorAll('.payment-details').forEach(function(detail) {
+                detail.classList.remove('active');
+            });
+
+            document.getElementById(method + '-details').classList.add('active');
+        }
+
+        function validateBillingForm() {
+            const form = document.getElementById('billing-form');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+            return true;
+        }
+
+        function placeOrder() {
+            if (!validateBillingForm()) {
+                alert('Please fill in all required billing information.');
+                return;
+            }
+
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method.');
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem('crystalHunterCart') || '[]');
+            const billingData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zip: document.getElementById('zip').value,
+                country: document.getElementById('country').value
+            };
+
+            const subtotal = cart.reduce(function(sum, item) {
+                return sum + item.price;
+            }, 0);
+            const tax = Math.round(subtotal * 0.08);
+            const total = subtotal + tax;
+
+            if (selectedPaymentMethod === 'card') {
+                processCardPayment(billingData, cart, total);
+            } else if (selectedPaymentMethod === 'paypal') {
+                processPayPalPayment(billingData, cart, total);
+            } else if (selectedPaymentMethod === 'stripe') {
+                processStripePayment(billingData, cart, total);
+            } else if (selectedPaymentMethod === 'crypto') {
+                processCryptoPayment(billingData, cart, total);
+            }
+        }
+
+        function processCardPayment(billingData, cart, total) {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const cardName = document.getElementById('cardName').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (!cardNumber || !cardName || !expiry || !cvv) {
+                alert('Please fill in all card details.');
+                return;
+            }
+
+            alert('Processing card payment of $' + total.toLocaleString() + '...\n\nThis is a demo. In production, this would connect to a real payment gateway.');
+            
+            setTimeout(function() {
+                completeOrder();
+            }, 1500);
+        }
+
+        function processPayPalPayment(billingData, cart, total) {
+            alert('Redirecting to PayPal for payment of $' + total.toLocaleString() + '...\n\nThis is a demo. In production, you would integrate PayPal SDK.');
+            
+            setTimeout(function() {
+                completeOrder();
+            }, 1500);
+        }
+
+        function processStripePayment(billingData, cart, total) {
+            alert('Redirecting to Stripe for payment of $' + total.toLocaleString() + '...\n\nThis is a demo. In production, you would integrate Stripe SDK.');
+            
+            setTimeout(function() {
+                completeOrder();
+            }, 1500);
+        }
+
+        function processCryptoPayment(billingData, cart, total) {
+            const cryptoType = document.getElementById('cryptoType').value;
+            alert('Processing ' + cryptoType + ' payment of $' + total.toLocaleString() + '...\n\nThis is a demo. In production, you would integrate a crypto payment gateway like Coinbase Commerce or BitPay.');
+            
+            setTimeout(function() {
+                completeOrder();
+            }, 1500);
+        }
+
+        function completeOrder() {
+            localStorage.removeItem('crystalHunterCart');
+            alert('Order placed successfully! Thank you for your purchase.\n\nYou will receive a confirmation email shortly.');
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrderSummary();
+
+            const cardNumberInput = document.getElementById('cardNumber');
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\s/g, '');
+                    let formattedValue = value.match(/.{1,4}/g);
+                    if (formattedValue) {
+                        e.target.value = formattedValue.join(' ');
+                    } else {
+                        e.target.value = value;
+                    }
+                });
+            }
+
+            const expiryInput = document.getElementById('expiry');
+            if (expiryInput) {
+                expiryInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length >= 2) {
+                        value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                    }
+                    e.target.value = value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
