@@ -3,250 +3,675 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crystal Hunter - Ladies and gentlemen, Welcome to the BEST SHOW</title>
+    <title>Crystal Hunter - Premium Gem Jewelry</title>
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: white;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             color: #333;
-            display: flex;
-            flex-direction: column;
+            background: #f9f9f9;
         }
 
+        /* Header Styles */
         header {
-            background-color: #F880C8;
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
             color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            border-bottom: 1px solid #ddd;
-            padding: 10px 0;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #F880C8;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            display: flex;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-            flex-direction: column;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            position: fixed;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(248, 128, 200, 0.3);
+            position: sticky;
             top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background-color: #F880C8;
-            color: white;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-            transition: left 0.3s ease;
             z-index: 1000;
         }
 
-        .sidebar h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .sidebar ul li {
-            margin-bottom: 10px;
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
 
-        .sidebar ul li a {
+        .nav-links a {
+            color: white;
             text-decoration: none;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* Sidebar Toggle Button */
-        .sidebar-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 1100;
-        }
-
-        .sidebar-toggle:hover {
-            color: #e070b3;
-        }
-
-        /* Popup Styles */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            z-index: 2000;
-            border-radius: 10px;
-        }
-
-        .popup button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
             border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #E060B0;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(248, 128, 200, 0.1) 0%, rgba(230, 96, 176, 0.1) 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #F880C8;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: #F880C8;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(248, 128, 200, 0.4);
         }
 
-        .popup .red-pill {
-            background-color: #FF6666;
+        .cta-button:hover {
+            background: #E060B0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(248, 128, 200, 0.6);
+        }
+
+        /* Brand Story Section */
+        .brand-story {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(248, 128, 200, 0.15);
+        }
+
+        .brand-story h2 {
+            color: #F880C8;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .brand-story-content {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.9;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .brand-story-content strong {
+            color: #F880C8;
+            font-weight: 600;
+        }
+
+        .energy-highlight {
+            background: linear-gradient(135deg, rgba(248, 128, 200, 0.1) 0%, rgba(230, 96, 176, 0.1) 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #F880C8;
+            margin: 2rem 0;
+        }
+
+        .blog-link-section {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(248, 128, 200, 0.2);
+        }
+
+        .blog-link-section p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .blog-button {
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
             color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(248, 128, 200, 0.4);
         }
 
-        .popup .blue-pill {
-            background-color: #6666FF;
+        .blog-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(248, 128, 200, 0.6);
+        }
+
+        /* Products Section */
+        .products {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #F880C8;
+            margin-bottom: 3rem;
+        }
+
+        .product-buttons {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .product-buttons .cta-button {
+            margin: 0 1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(248, 128, 200, 0.3);
+            border-color: #F880C8;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #F880C8;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .buy-button {
+            width: 100%;
+            background: #F880C8;
             color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .popup button:hover {
-            opacity: 0.8;
+        .buy-button:hover {
+            background: #E060B0;
+        }
+
+        /* Subliminal Selling Section */
+        .subliminal-selling {
+            background: #f0f0f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, rgba(248, 128, 200, 0.1) 0%, rgba(230, 96, 176, 0.1) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            color: #F880C8;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Neville Goddard Section */
+        .neville-goddard {
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .neville-goddard h2 {
+            color: #F880C8;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .neville-goddard p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #F880C8 0%, #E060B0 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            display: inline-block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about h2,
+            .neville-goddard h2 {
+                font-size: 2rem;
+            }
+
+            .buy-button {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Crystal Hunter</h1>
-        <p>Shop the Finest Jewelry Collections</p>
+        <nav>
+            <div class="logo">💎 Crystal Hunter</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li class="cart-link">
+                    <a href="cart.html">🛒 Cart</a>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </li>
+            </ul>
+        </nav>
     </header>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#shop">Shop</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h3>Wearing Style</h3>
-        <ul>
-            <li><a href="#" onclick="filterProducts('rings')">Rings</a></li>
-            <li><a href="#" onclick="filterProducts('necklaces')">Necklaces</a></li>
-            <li><a href="#" onclick="filterProducts('bracelets')">Bracelets</a></li>
-        </ul>
-        <h3>Stone Color</h3>
-        <ul>
-            <li><a href="#" onclick="filterProducts('red')">Red</a></li>
-            <li><a href="#" onclick="filterProducts('pink')">Pink</a></li>
-            <li><a href="#" onclick="filterProducts('green')">Green</a></li>
-            <li><a href="#" onclick="filterProducts('blue')">Blue</a></li>
-            <li><a href="#" onclick="filterProducts('purple')">Purple</a></li>
-            <li><a href="#" onclick="filterProducts('special')">Special</a></li>
-            <li><a href="#" onclick="filterProducts('transparent')">Transparent</a></li>
-        </ul>
-        <button onclick="showAllProducts()">Show All</button>
-    </div>
-    <!-- Sidebar Toggle -->
-    <div class="sidebar-toggle">🩷</div>
 
-    <!-- Main Content -->
-    <main>
-        <h2>Shop Our Collections</h2>
-        <div class="product-grid">
-            <!-- Product Examples -->
-            <div class="product rings pink">
-                <img src="https://via.placeholder.com/250" alt="Pink Ring">
-                <h3>Pink Diamond Ring</h3>
-                <p>A stunning pink diamond ring for special occasions.</p>
-                <p class="price">$350</p>
-                <a href="#" class="buy-btn">Buy Now</a>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Welcome to Crystal Hunter</h1>
+        <p>Discover Exquisite Gem Jewelry Crafted with Passion</p>
+        <a href="#products" class="cta-button">Explore Collection</a>
+    </section>
+
+       <!-- Brand Story Section -->
+    <section class="brand-story">
+        <h2>✨ Our Brand Story ✨</h2>
+        <div class="brand-story-content">
+            <p>
+                At <strong>Crystal Hunter</strong>, we are dedicated to <strong>helping people manifest their dreams and desires</strong> through the ancient power of gemstones. We believe that every gemstone is a precious <strong>gift from Mother Earth</strong>, carrying within it special energy and unique vibrations that have been formed over millions of years.
+            </p>
+            <div class="energy-highlight">
+                <p>
+                    <strong>🌍 Our Mission:</strong> We don't just sell jewelry – we facilitate sacred connections. Each gemstone has its own energy signature, waiting to find its rightful owner. Our role is simply to help these beautiful gifts from nature discover the person they're meant to accompany on their life journey.
+                </p>
             </div>
-            <div class="product necklaces blue">
-                <img src="https://via.placeholder.com/250" alt="Blue Necklace">
-                <h3>Blue Sapphire Necklace</h3>
-                <p>Elegant blue sapphire necklace.</p>
-                <p class="price">$500</p>
-                <a href="#" class="buy-btn">Buy Now</a>
+            <p>
+                Every piece in our collection is carefully selected and crafted with intention. We understand that when you wear a gemstone that resonates with your energy, it becomes a powerful tool for manifestation, healing, and personal transformation.
+            </p>
+            <p>
+                <strong>⚡ Energy Charging Service:</strong> To enhance your manifestation journey, we offer a special <strong>energy charging option</strong> for each piece of jewelry. Before it reaches you, we can cleanse and charge your gemstone under moonlight, with sacred herbs, or through crystal grid activation – ensuring it arrives at its full energetic potential, ready to support your intentions.
+            </p>
+        </div>
+        
+        <div class="blog-link-section">
+            <p>🌟 Want to learn more about how gemstones can help you manifest your dreams?</p>
+            <a href="blog.html" class="blog-button">Read Our Manifestation Guide →</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <h2 class="section-title">Our Featured Collection</h2>
+        
+        <!-- Button to show gemstone products -->
+        <div class="product-buttons">
+            <a href="#gemstone-products" class="cta-button">View Gemstone Products</a>
+            <a href="#subliminal-selling" class="cta-button">Subliminal Selling Options</a>
+        </div>
+
+        <!-- Gemstone Products Section -->
+        <div class="gemstone-products" id="gemstone-products">
+            <h3>💎 Gemstone Products</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">💍</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ruby Elegance Ring</h3>
+                        <p class="product-description">Stunning ruby set in 18k gold with diamond accents.</p>
+                        <div class="product-price">$1,299</div>
+                        <button class="buy-button" onclick="addToCart('Ruby Elegance Ring', 1299, '💍')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">📿</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sapphire Dream Necklace</h3>
+                        <p class="product-description">Blue sapphire pendant with silver chain.</p>
+                        <div class="product-price">$899</div>
+                        <button class="buy-button" onclick="addToCart('Sapphire Dream Necklace', 899, '📿')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">✨</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Emerald Sparkle Earrings</h3>
+                        <p class="product-description">Natural emerald drop earrings in white gold.</p>
+                        <div class="product-price">$1,499</div>
+                        <button class="buy-button" onclick="addToCart('Emerald Sparkle Earrings', 1499, '✨')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💎</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Radiance Bracelet</h3>
+                        <p class="product-description">Tennis bracelet with brilliant cut diamonds.</p>
+                        <div class="product-price">$2,199</div>
+                        <button class="buy-button" onclick="addToCart('Diamond Radiance Bracelet', 2199, '💎')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌟</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Amethyst Crown Ring</h3>
+                        <p class="product-description">Royal purple amethyst in vintage gold setting.</p>
+                        <div class="product-price">$749</div>
+                        <button class="buy-button" onclick="addToCart('Amethyst Crown Ring', 749, '🌟')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💫</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Opal Magic Pendant</h3>
+                        <p class="product-description">Australian opal with rainbow fire effect.</p>
+                        <div class="product-price">$999</div>
+                        <button class="buy-button" onclick="addToCart('Opal Magic Pendant', 999, '💫')">Add to Cart</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
 
-    <!-- Popup -->
-    <div class="popup" id="popup">
-        <p>Red pill or blue pill?</p>
-        <button class="red-pill" onclick="closePopup()">❤️</button>
-        <button class="blue-pill" onclick="closePopup()">💙</button>
-    </div>
+        <!-- Subliminal Selling Section -->
+        <div class="subliminal-selling" id="subliminal-selling">
+            <h3>✨ Subliminal Selling Options</h3>
+            <p>Choose to enhance your purchase experience with our subliminal selling options:</p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">💍</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ruby Elegance Ring</h3>
+                        <p class="product-description">Stunning ruby set in 18k gold with diamond accents.</p>
+                        <div class="product-price">$1,299</div>
+                        <button class="buy-button" onclick="addToCart('Ruby Elegance Ring', 1299, '💍')">Subliminal Purchase</button>
+                    </div>
+                </div>
 
+                <div class="product-card">
+                    <div class="product-image">📿</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sapphire Dream Necklace</h3>
+                        <p class="product-description">Blue sapphire pendant with silver chain.</p>
+                        <div class="product-price">$899</div>
+                        <button class="buy-button" onclick="addToCart('Sapphire Dream Necklace', 899, '📿')">Subliminal Purchase</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">✨</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Emerald Sparkle Earrings</h3>
+                        <p class="product-description">Natural emerald drop earrings in white gold.</p>
+                        <div class="product-price">$1,499</div>
+                        <button class="buy-button" onclick="addToCart('Emerald Sparkle Earrings', 1499, '✨')">Subliminal Purchase</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💎</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diamond Radiance Bracelet</h3>
+                        <p class="product-description">Tennis bracelet with brilliant cut diamonds.</p>
+                        <div class="product-price">$2,199</div>
+                        <button class="buy-button" onclick="addToCart('Diamond Radiance Bracelet', 2199, '💎')">Subliminal Purchase</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌟</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Amethyst Crown Ring</h3>
+                        <p class="product-description">Royal purple amethyst in vintage gold setting.</p>
+                        <div class="product-price">$749</div>
+                        <button class="buy-button" onclick="addToCart('Amethyst Crown Ring', 749, '🌟')">Subliminal Purchase</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💫</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Opal Magic Pendant</h3>
+                        <p class="product-description">Australian opal with rainbow fire effect.</p>
+                        <div class="product-price">$999</div>
+                        <button class="buy-button" onclick="addToCart('Opal Magic Pendant', 999, '💫')">Subliminal Purchase</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>About Crystal Hunter</h2>
+            <p>
+                At Crystal Hunter, we believe that every gemstone tells a story. For over a decade, 
+                we've been sourcing the finest gems from around the world and crafting them into 
+                timeless pieces of jewelry. Each piece is carefully designed and handcrafted by our 
+                master jewelers, ensuring the highest quality and attention to detail. Our passion 
+                for excellence and commitment to authenticity make every Crystal Hunter piece a 
+                treasure to cherish for generations.
+            </p>
+        </div>
+    </section>
+
+ <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Crystal Hunter. All rights reserved.</p>
+        <div class="footer-content">
+            <h3>Crystal Hunter</h3>
+            <p>Email: info@crystalhunter.com | Phone: +1 (555) 123-4567</p>
+            <div class="social-links">
+                <a href="#">Tiktok</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+                <a href="#">Youtube</a>
+            </div>
+            <p>&copy; 2025 Crystal Hunter. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
-        // Sidebar Toggle Functionality
-        const sidebar = document.querySelector('.sidebar');
-        const sidebarToggle = document.querySelector('.sidebar-toggle');
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+        // Function to add items to cart
+        function addToCart(name, price, icon) {
+            // Create item object
+            const item = {
+                id: Date.now(),
+                name: name,
+                price: price,
+                icon: icon
+            };
+            
+            // Get existing cart from localStorage or create new array
+            let cart = JSON.parse(localStorage.getItem('crystalHunterCart') || '[]');
+            
+            // Add new item to cart
+            cart.push(item);
+            
+            // Save updated cart to localStorage
+            localStorage.setItem('crystalHunterCart', JSON.stringify(cart));
+            
+            // Update cart badge
+            updateCartBadge();
+            
+            // Show confirmation
+            alert(`✨ ${name} has been added to your cart!`);
+        }
+
+        // Function to update cart badge count
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('crystalHunterCart') || '[]');
+            const badge = document.getElementById('cart-badge');
+            const count = cart.length;
+            
+            if (count > 0) {
+                badge.textContent = count;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        // Update cart badge on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
         });
-
-        // Popup Functionality
-        const popup = document.getElementById('popup');
-        setTimeout(() => {
-            popup.style.display = 'block';
-        }, 30000); // 30 seconds
-
-        function closePopup() {
-            popup.style.display = 'none';
-        }
-
-        // Product Filtering Functionality
-        function filterProducts(category) {
-            const products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                if (product.classList.contains(category)) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-        }
-
-        function showAllProducts() {
-            const products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                product.style.display = 'block';
-            });
-        }
     </script>
 </body>
 </html>
